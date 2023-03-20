@@ -7,5 +7,9 @@
 
   outputs = { self, nixpkgs-lib}: {
     lib = import ./lib.nix { lib=nixpkgs-lib.lib; };
+    templates.default = {
+      path = ./templates/default;
+      description = "Template for a flake using configurable-flakes with flake-utils";
+    };
   };
 }
