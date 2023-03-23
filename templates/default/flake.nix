@@ -13,14 +13,14 @@
       {
         options = {
           systems = lib.mkOption {
-            type = with lib.types; listOf (enum utils.allSystems);
+            type = with lib.types; listOf (enum flake-utils.lib.allSystems);
             default = [ "aarch64-linux" "x86_64-linux"];
           };
           debug = lib.mkEnableOption "debug";
         };
       }
       ({ config, ... }:
-        flake-utils.eachSystem config.systems (system:
+        flake-utils.lib.eachSystem config.systems (system:
           let
             pkgs = nixpkgs.legacyPackages.${system};
             packages = import ./default.nix { inherit pkgs;
