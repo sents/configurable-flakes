@@ -14,9 +14,9 @@
     , config ? { }
     }: outputBuilder:
       let mergedConfig = evalConfig options config;
-          withConfig = newConfig: configurableFlake {
+          withConfig = newConfig: configurableFlake inputs {
             config = newConfig;
-            inherit options inputs;} outputBuilder;
+            inherit options;} outputBuilder;
       in
         (outputBuilder (inputs // {config = mergedConfig.config;})) //
         { config = mergedConfig; inherit options withConfig;};
